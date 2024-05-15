@@ -1,5 +1,7 @@
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import './App.css';
+import { Header } from './components/Header';
+import { ContactList } from './components/ContactList';
 import { getContact } from './api/ContactService';
 import { Routes, Route, Navigate } from 'react-router-dom';
 
