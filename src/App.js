@@ -22,7 +22,7 @@ function App() {
     }
   }
 
-  const toogleModal = (show) => { show ? modalRef.current.showModal() : modalRef.current.close() };
+  const toggleModal = (show) => { show ? modalRef.current.showModal() : modalRef.current.close() };
 
   useEffect(() => {
     getAllContacts();
