@@ -7,8 +7,22 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 
 function App() {
   const modalRef  = useRef();
+  const fileRef= useRef();
   const [data, setData] = useState({});
   const [currentPage, setCurrentPage] = useState(0);
+  const [file, setFile] = useState(undefined);
+  const [values, setValues] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    address: '',
+    title: '',
+    status: '',
+  })
+
+  const onChange= (event) => {
+    setValues({...values, [event.target.name]: event.target.value})
+  }
 
   const getAllContacts = async (page = 0, size = 10) => {
     try {
@@ -16,6 +30,33 @@ function App() {
       const { data } = await getContact(page, size);
       setData(data);
       console.log(data);
+
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  const handleNewContact= async (event) => {
+    event.preventDefault();
+    try {
+      const { data } = await saveContact(values);
+      const formData = new FormData();
+      formData.append('file', file, file.name);
+      formData.append('id', data.id);
+      const { data: photoUrl } = await updatePhoto(formData);
+      console.log(photoUrl);
+      toggleModal(false);
+      setFile = undefined;
+      fileRef.current.value = null;
+      setValues({
+        name: '',
+        email: '',
+        phone: '',
+        address: '',
+        title: '',
+        status: '',
+      });
+      getAllContacts();
 
     } catch (error) {
       console.log(error);
