@@ -18,7 +18,7 @@ function App() {
     address: '',
     title: '',
     status: '',
-  })
+  });
 
   const onChange= (event) => {
     setValues({...values, [event.target.name]: event.target.value})
@@ -34,6 +34,12 @@ function App() {
     } catch (error) {
       console.log(error);
     }
+  }
+
+  const updateContact = async () => {
+  }
+
+  const updateImage = async () => {
   }
 
   const handleNewContact= async (event) => {
@@ -77,6 +83,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Navigate to={"/contacts"} />} />
             <Route path="/contacts" element={<ContactList data={data} currentPage={currentPage} getAllContacts={getAllContacts} />} />
+            <Route path="/contacts/:id" element={<ContactDetail updateContact={updateContact} updateImage={updateImage} />} />
           </Routes>
         </div>
       </main>
