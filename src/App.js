@@ -1,8 +1,9 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import './App.css';
-import { Header } from './components/Header';
-import { ContactList } from './components/ContactList';
-import { getContact } from './api/ContactService';
+import Header from './components/Header';
+import ContactList from './components/ContactList';
+import ContactDetail from './components/ContactDetail';
+import { getContact, saveContact } from './api/ContactService';
 import { Routes, Route, Navigate } from 'react-router-dom';
 
 function App() {
@@ -49,7 +50,7 @@ function App() {
       const formData = new FormData();
       formData.append('file', file, file.name);
       formData.append('id', data.id);
-      const { data: photoUrl } = await updatePhoto(formData);
+      const { data: photoUrl } = await updateImage(formData);
       console.log(photoUrl);
       toggleModal(false);
       setFile = undefined;
@@ -77,7 +78,7 @@ function App() {
 
   return (
     <>
-      <Header toogleModal={toogleModal} nbOfContacts={data.totalElements} />
+      <Header toggleModal={toggleModal} nbOfContacts={data.totalElements} />
       <main className="main">
         <div className="container">
           <Routes>

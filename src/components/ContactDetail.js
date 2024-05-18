@@ -1,4 +1,4 @@
-import React from 'react'
+import { React, useState, useParams } from 'react'
 
 const ContactDetail = ({ updateContact, updateImage}) => {
     const [values, setValues] = useState({
